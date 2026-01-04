@@ -13,11 +13,11 @@ camera.position.z = 5;
 
 // 3. Object
 const geometry = new THREE.DodecahedronGeometry();
-const material = new THREE.MeshBasicMaterial({ color: '#a13f5f', emissive: '#a13f5f' });
+const material = new THREE.MeshLambertMaterial({ color: '#e051a9', emissive: '#e051a9' });
 const dodecahedron = new THREE.Mesh(geometry, material);
 
 const boxGeometry = new THREE.BoxGeometry(2, 0.1, 2);
-const boxMaterial = new THREE.MeshBasicMaterial({ color: '#591f32', emissive: '#591f32' });
+const boxMaterial = new THREE.MeshStandardMaterial({ color: '#B4B4B3', emissive: '#B4B4B3' });
 const box = new THREE.Mesh(boxGeometry, boxMaterial);
 box.position.y = -1.5;
 
@@ -25,7 +25,7 @@ scene.add(dodecahedron);
 scene.add(box);
 
 // 4. Light
-const light = new THREE.SpotLight(0x006769, 10);
+const light = new THREE.SpotLight('#e08bc0', 100);
 light.position.set(1, 1, 1);
 scene.add(light);
 
@@ -54,5 +54,12 @@ function animate() {
 
     renderer.render(scene, camera);
 }
+
+// 8. Handle window resizing
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
 animate();
